@@ -1,0 +1,21 @@
+name: {{cookiecutter.repo_name}}
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.8
+  - jupyter
+  - jupyter_contrib_nbextensions
+  - numpy
+  - pandas
+  - matplotlib
+  - isort
+  - black
+  - flake
+  - tensorflow
+  - keras
+  - scikit-learn
+  - pickle
+  - importlib
+  - deon
+  - pip 
