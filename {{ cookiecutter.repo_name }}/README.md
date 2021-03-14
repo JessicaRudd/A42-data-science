@@ -118,4 +118,4 @@ conda remove –name {{cookiecutter.repo_name}} –all
 --------
 
 <p><small>Project based on the <a target="_blank" href="https://drivendata.github.io/cookiecutter-data-science/">cookiecutter data science project template </a> #cookiecutterdatascience</small></p>
-<p><small>Example config.yml and scripts for stateless ETL, train, model MVP based on <a target="_blank" href="https://github.com/G-Hung/model-productization_article">G-Hung model production article and repository</a>. #cookiecutterdatascience</small></p>
+<p><small>Example config.yml and scripts for stateless ETL, train, model MVP based on <a target="_blank" href="https://github.com/G-Hung/model-productization_article">G-Hung model production article and repository</a></small></p>
