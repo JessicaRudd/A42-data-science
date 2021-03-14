@@ -3,7 +3,7 @@ channels:
   - conda-forge
   - defaults
 dependencies:
-  - python=3.8
+  #- python = 3.8
   - jupyter
   - jupyter_contrib_nbextensions
   - numpy
@@ -11,11 +11,11 @@ dependencies:
   - matplotlib
   - isort
   - black
-  - flake
-  - tensorflow
-  - keras
+  - flake8
+  - click
+  - pytest
   - scikit-learn
-  - pickle
+  - pickle5
   - importlib
   - deon
   - pip 

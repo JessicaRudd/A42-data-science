@@ -3,7 +3,7 @@
 _A data science project template, customized from the CookieCutter Data Science template, to make reproducible projects._
 
 
-#### [Project homepage](http://jrudd1.github.io/A42-data-science/)
+#### [Project homepage](https://github.com/jrudd1/A42-data-science)
 
 
 ### Requirements to use the cookiecutter template:
