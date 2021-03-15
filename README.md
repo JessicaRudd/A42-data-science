@@ -3,7 +3,7 @@
 _A data science project template, customized from the CookieCutter Data Science template, to make reproducible projects._
 
 
-#### [Project homepage](https://github.com/jrudd1/A42-data-science)
+#### [Project homepage](https://github.com/a42labs/A42-data-science)
 
 
 ### Requirements to use the cookiecutter template:
@@ -26,7 +26,7 @@ $ conda install cookiecutter
 ### To start a new project, run:
 ------------
 
-    cookiecutter https://github.com/jrudd1/A42-data-science
+    cookiecutter https://github.com/a42labs/A42-data-science
 
 
 <!-- [![asciicast](https://asciinema.org/a/244658.svg)](https://asciinema.org/a/244658) -->
