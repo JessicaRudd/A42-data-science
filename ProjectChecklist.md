@@ -71,7 +71,7 @@
                 git commit -m "add commit message here"
 
                 git push origin main
-                ```
+                ```E
         - The cookiecutter project template automatically creates a .gitignore file for you but you can create one from a template [here](https://github.com/github/gitignore/blob/master/Python.gitignore). This is a good idea so extraneous files, secret keys, etc. are not shared publicly via git. 
     - [ ] Pre-commit framework
         - [ ] Pre-commit hooks can be used to check for clean code conventions before committing changes - isort, black, flake
