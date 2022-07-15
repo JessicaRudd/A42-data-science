@@ -76,14 +76,18 @@ git clone https://github.com/{{ cookiecutter.github_username}}/{{cookiecutter.re
 cd {{cookiecutter.project_name}}
 ```
 
-3. Setup conda env in terminal
+3. Create virtual environment
 ```
-conda env create 
+{{cookiecutter.python_interpreter}} -m venv env
+source env/bin/activate
+{{cookiecutter.python_interpreter}} -m pip install pip setuptools wheel
+{{cookiecutter.python_interpreter}} -m pip install -e .
 
-conda activate {{cookiecutter.repo_name}}
+# OR to create virtual env and install development package
+make venv
 
 ```
-4. Setup conda env in terminal
+4. Setup secret environment vars in terminal
 ```
 Create .env file in project directory to store your secret keys, i.e. AWS, APIs, etc. :
 
@@ -94,24 +98,29 @@ python3 ./src/etl.py
 python3 ./src/train.py
 python3 ./src/predict.py
 ```
+6. Clean, style, and test code:
+   1. To run unit test in terminal (this will also clean and style code)
+   ```
+   make test
+   ```
 
-6. To run unit test in terminal
-```
-pytest
-```
+   2. To clean and autoformat code 
+   ```
+   make clean
+   ```
 
-7. To run autoformat.sh in terminal
-```
-# If you get permission error, you can try
-# chmod +rx autoformat.sh
+   3. To lint code 
+   ```
+   make lint
+   ```
+   4. Clean, style, and test, and lint code
+   ```
+   make check
+   ```
 
-./autoformat.sh
+7. After usage
 ```
-
-8. After usage
-```
-conda deactivate
-conda remove –name {{cookiecutter.repo_name}} –all
+deactivate
 ```
 
 

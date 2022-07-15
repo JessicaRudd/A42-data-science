@@ -1,4 +1,17 @@
-.PHONY: clean data lint requirements sync_data_to_s3 sync_data_from_s3
+SHELL := /bin/bash
+
+# .PHONY: help
+# help:
+# 	@echo "Commands:"
+# 	@echo "venv    : creates development environment."
+# 	@echo "style   : runs style formatting."
+# 	@echo "clean   : cleans all unecessary files."
+# 	@echo "test	   : run pytest."
+# 	@echo "check   : runs pytest, pylint, and mypy to test code."
+# 	@echo "test_environment : installs and checks python dependencies."
+# 	@echo "install: install project locally in editable mode."
+
+# .PHONY: clean data lint requirements sync_data_to_s3 sync_data_from_s3
 
 #################################################################################
 # GLOBALS                                                                       #
@@ -9,34 +22,62 @@ BUCKET = {{ cookiecutter.s3_bucket }}
 PROFILE = {{ cookiecutter.aws_profile }}
 PROJECT_NAME = {{ cookiecutter.repo_name }}
 PYTHON_INTERPRETER = {{ cookiecutter.python_interpreter }}
-
-ifeq (,$(shell which conda))
-HAS_CONDA=False
-else
-HAS_CONDA=True
-endif
+MIN_CODE_COV = {{ cookiecutter.min_code_cov }}
 
 #################################################################################
 # COMMANDS                                                                      #
 #################################################################################
+
+## Install project as local package in editable mode
+.PHONY: install
+install:
+		$(PYTHON_INTERPRETER) -m pip install -e . --no-cache-dir
 
 ## Install Python Dependencies
 requirements: test_environment
 	$(PYTHON_INTERPRETER) -m pip install -U pip setuptools wheel
 	$(PYTHON_INTERPRETER) -m pip install -r requirements.txt
 
+# Environment
+venv:
+	$(PYTHON_INTERPRETER) -m venv env && \
+	source env/bin/activate && \
+	$(PYTHON_INTERPRETER) -m pip install --upgrade pip setuptools wheel && \
+	$(PYTHON_INTERPRETER) -m pip install -e ".[dev]" --no-cache-dir && \
+	pre-commit install && \
+	pre-commit autoupdate
+
 ## Make Dataset
 data: requirements
 	$(PYTHON_INTERPRETER) src/data/make_dataset.py data/raw data/processed
 
-## Delete all compiled Python files
-clean:
-	find . -type f -name "*.py[co]" -delete
-	find . -type d -name "__pycache__" -delete
 
-## Lint using flake8
+# Styling
+.PHONY: style
+style:
+	black ./src
+	flake8 ./src
+	isort ./src
+
+# Cleaning
+.PHONY: clean
+clean: style
+	find . -type f -name "*.DS_Store" -ls -delete
+	find . | grep -E "(__pycache__|\.pyc|\.pyo)" | xargs rm -rf
+	find . | grep -E ".pytest_cache" | xargs rm -rf
+	find . | grep -E ".ipynb_checkpoints" | xargs rm -rf
+	rm -f .coverage
+	rm -f .coverage.*
+
+## Lint using pylint
 lint:
-	flake8 src
+	. env/bin/activate && pylint src -j 4 --reports=y
+
+.PHONY: test
+test: clean
+	. env/bin/activate && pytest --cov=src --cov-report=term-missing --cov-fail-under $(MIN_CODE_COV)
+
+check: test lint mypy
 
 ## Upload Data to S3
 sync_data_to_s3:
@@ -52,24 +93,6 @@ ifeq (default,$(PROFILE))
 	aws s3 sync s3://$(BUCKET)/data/ data/
 else
 	aws s3 sync s3://$(BUCKET)/data/ data/ --profile $(PROFILE)
-endif
-
-## Set up python interpreter environment
-create_environment:
-ifeq (True,$(HAS_CONDA))
-		@echo ">>> Detected conda, creating conda environment."
-ifeq (3,$(findstring 3,$(PYTHON_INTERPRETER)))
-	conda create --name $(PROJECT_NAME) python=3
-else
-	conda create --name $(PROJECT_NAME) python=2.7
-endif
-		@echo ">>> New conda env created. Activate with:\nsource activate $(PROJECT_NAME)"
-else
-	$(PYTHON_INTERPRETER) -m pip install -q virtualenv virtualenvwrapper
-	@echo ">>> Installing virtualenvwrapper if not already installed.\nMake sure the following lines are in shell startup file\n\
-	export WORKON_HOME=$$HOME/.virtualenvs\nexport PROJECT_HOME=$$HOME/Devel\nsource /usr/local/bin/virtualenvwrapper.sh\n"
-	@bash -c "source `which virtualenvwrapper.sh`;mkvirtualenv $(PROJECT_NAME) --python=$(PYTHON_INTERPRETER)"
-	@echo ">>> New virtualenv created. Activate with:\nworkon $(PROJECT_NAME)"
 endif
 
 ## Test python environment is setup correctly
