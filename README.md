@@ -5,7 +5,7 @@ _A data science project template, customized from the CookieCutter Data Science 
 
 #### [Project homepage](https://github.com/JessicaRudd/A42-data-science)
 
-
+#### [Data Science Project Checklist](https://github.com/JessicaRudd/A42-data-science/blob/main/ProjectChecklist.md)
 ### Requirements to use the cookiecutter template:
 -----------
  - Python 2.7 or 3.5+
