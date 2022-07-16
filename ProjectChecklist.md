@@ -29,25 +29,27 @@
         ```
         # Show list of available Python versions
         pyenv install --list
+
         # Install Python version
         pyenv install {version} # can install any version available from the available list
+
         # Check currently installed Python versions
         pyenv versions
+
         # Set a particular version as default global version
         pyenv global {version}
+
         # To set a particular version in a project, navigate to the project directory and:
         pyenv local {version}
         ```
-    - [ ] Cookiecutter to create project template \
-
+    - [ ] Cookiecutter to create project template - follow prompts to setup project
         ```
         ## Install cookiecutter package
         pip install cookiecutter
+
         ## Start a new cookiecutter project based off of this template
         cookiecutter https://github.com/JessicaRudd/A42-data-science
-        ```
-        Follow prompts to setup project 
-
+        ``` 
     - [ ] Change into new project folder 
         ```
         cd project-dir
@@ -56,7 +58,6 @@
             ```
             git init
             ``` 
-            \
             - There's a great explanation of creating a git repository, pushing to Github, and other tasks for creating a reproducible project [here](https://www.dataquest.io/blog/how-to-share-data-science-portfolio/), or this from [Gitflow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow)
         - [ ] Download GitHub CLI for additional git and Github capabilities from within the command line (rather than context switching between CLI and Github in web browser or Github Desktop)
             - [ ] macOS: 
@@ -80,7 +81,9 @@
                 git commit -m "add commit message here"
 
                 git push origin main
-                ```E
+                ```
+            - Good commit messages are important for documenting source control and adding valuable context to your work (both for future you and for your collaborators!)
+            - Check out [this source](https://www.freecodecamp.org/news/how-to-write-better-git-commit-messages/) and [this source](https://hackernoon.com/7-rules-for-writing-a-good-commit-message?source=rss) for tips on writing good commit messages.
         - The cookiecutter project template automatically creates a .gitignore file for you but you can create one from a template [here](https://github.com/github/gitignore/blob/master/Python.gitignore). This is a good idea so extraneous files, secret keys, etc. are not shared publicly via git. 
     - [ ] Create project environment 
         ```
