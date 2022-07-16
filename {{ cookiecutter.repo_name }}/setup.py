@@ -20,7 +20,7 @@ dev_packages = [
     "mccabe==0.7.0",
     "pre-commit==2.19.0",
     "jupyterlab>=3.0.0",
-    "jupyterlab-templates==0.3.1"
+    "jupyterlab-templates==0.3.1",
     "coverage[toml]",
 ]
 
