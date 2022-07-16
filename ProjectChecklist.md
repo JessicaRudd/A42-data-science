@@ -102,6 +102,11 @@
         - [ ] Pre-commit hooks can be used to check for clean code conventions before committing changes - isort, black, flake
             - This is best used on python scripts rather than the development jupyter notebooks since it will help with CI/CD framework
     - [ ] Install ethics checklist markdown file with deon and/or append to script (the markdown ethics file is automatically included in the [A42 Data Science CookieCutter template](https://github.com/JessicaRudd/A42-data-science))
+        ```
+        pip install deon
+        deon -o ETHICS.md # adds checklist if not already in project folder
+        deon -o my-analysis.ipynb # appends checklist to script/notebook
+        ```
     - [ ] This code [reproducibility checklist](https://www.cs.mcgill.ca/~jpineau/ReproducibilityChecklist.pdf) should also be considered
     - [ ] Add secret keys from required APIs, logins, etc. to the .env file in project directory (make sure .env is added to the .gitignore file if not already)
         - [ ] Use python-dotenv to load secret keys from environment into python script when sharing the project (basic how-to found [here](https://mathdatasimplified.com/2021/02/20/python-dotenv-how-to-load-the-secret-information-from-env-file/))
