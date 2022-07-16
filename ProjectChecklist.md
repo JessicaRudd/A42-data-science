@@ -55,10 +55,10 @@
         cd project-dir
         ```
     - [ ] Initialize Git repository 
-            ```
-            git init
-            ``` 
-            - There's a great explanation of creating a git repository, pushing to Github, and other tasks for creating a reproducible project [here](https://www.dataquest.io/blog/how-to-share-data-science-portfolio/), or this from [Gitflow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow)
+        ```
+        git init
+        ``` 
+        - There's a great explanation of creating a git repository, pushing to Github, and other tasks for creating a reproducible project [here](https://www.dataquest.io/blog/how-to-share-data-science-portfolio/), or this from [Gitflow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow)
         - [ ] Download GitHub CLI for additional git and Github capabilities from within the command line (rather than context switching between CLI and Github in web browser or Github Desktop)
             - [ ] macOS: 
                 ```
