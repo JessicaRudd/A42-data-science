@@ -1,17 +1,6 @@
 SHELL := /bin/bash
 
-# .PHONY: help
-# help:
-# 	@echo "Commands:"
-# 	@echo "venv    : creates development environment."
-# 	@echo "style   : runs style formatting."
-# 	@echo "clean   : cleans all unecessary files."
-# 	@echo "test	   : run pytest."
-# 	@echo "check   : runs pytest, pylint, and mypy to test code."
-# 	@echo "test_environment : installs and checks python dependencies."
-# 	@echo "install: install project locally in editable mode."
-
-# .PHONY: clean data lint requirements sync_data_to_s3 sync_data_from_s3
+.PHONY: install venv clean data clean lint test check test_environment requirements sync_data_to_s3 sync_data_from_s3
 
 #################################################################################
 # GLOBALS                                                                       #
@@ -29,7 +18,6 @@ MIN_CODE_COV = {{ cookiecutter.min_code_cov }}
 #################################################################################
 
 ## Install project as local package in editable mode
-.PHONY: install
 install:
 		$(PYTHON_INTERPRETER) -m pip install -e . --no-cache-dir
 
@@ -38,14 +26,16 @@ requirements: test_environment
 	$(PYTHON_INTERPRETER) -m pip install -U pip setuptools wheel
 	$(PYTHON_INTERPRETER) -m pip install -r requirements.txt
 
-# Environment
+## Setup virtual environment, upgrade packages, and install pre-commit, jupyterlab
 venv:
 	$(PYTHON_INTERPRETER) -m venv env && \
 	source env/bin/activate && \
 	$(PYTHON_INTERPRETER) -m pip install --upgrade pip setuptools wheel && \
 	$(PYTHON_INTERPRETER) -m pip install -e ".[dev]" --no-cache-dir && \
 	pre-commit install && \
-	pre-commit autoupdate
+	pre-commit autoupdate && \
+	jupyter labextension install jupyterlab_templates && \
+	jupyter serverextension enable --py jupyterlab_templates
 
 ## Make Dataset
 data: requirements
@@ -59,8 +49,7 @@ style:
 	flake8 ./src
 	isort ./src
 
-# Cleaning
-.PHONY: clean
+## Style code and cleanup temporary pycache folders
 clean: style
 	find . -type f -name "*.DS_Store" -ls -delete
 	find . | grep -E "(__pycache__|\.pyc|\.pyo)" | xargs rm -rf
@@ -69,14 +58,15 @@ clean: style
 	rm -f .coverage
 	rm -f .coverage.*
 
-## Lint using pylint
+## Lint code using pylint
 lint:
 	. env/bin/activate && pylint src -j 4 --reports=y
 
-.PHONY: test
+## Style code and run pytest
 test: clean
 	. env/bin/activate && pytest --cov=src --cov-report=term-missing --cov-fail-under $(MIN_CODE_COV)
 
+## Style, clean, lint, test code
 check: test lint mypy
 
 ## Upload Data to S3

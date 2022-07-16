@@ -17,9 +17,10 @@ dev_packages = [
     "black==20.8b1",
     "flake8==3.8.3",
     "isort==5.9.3",
+    "mccabe==0.7.0",
     "pre-commit==2.19.0",
-    "mccabe==0.6.0",
-    "jupyterlab==2.2.8",
+    "jupyterlab>=3.0.0",
+    "jupyterlab-templates==0.3.1"
     "coverage[toml]",
 ]
 

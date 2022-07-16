@@ -1,6 +1,3 @@
-# local package
--e .
-
 # external requirements
 click
 Sphinx
@@ -9,10 +6,17 @@ awscli
 flake8
 black
 isort
+autopep8
 pylint
 mypy
 pre-commit
 python-dotenv>=0.5.1
+
+# data science requirements
+numpy
+pandas
+plotly
+
 {% if cookiecutter.python_interpreter != 'python3' %}
 
 # backwards compatibility
