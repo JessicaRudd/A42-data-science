@@ -1,9 +1,9 @@
-# A42 Labs CookieCutter Data Science Template
+# A42 Custom CookieCutter Data Science Template
 
 _A data science project template, customized from the CookieCutter Data Science template, to make reproducible projects._
 
 
-#### [Project homepage](https://github.com/a42labs/A42-data-science)
+#### [Project homepage](https://github.com/JessicaRudd/A42-data-science)
 
 
 ### Requirements to use the cookiecutter template:
@@ -26,7 +26,7 @@ $ conda install cookiecutter
 ### To start a new project, run:
 ------------
 
-    cookiecutter https://github.com/a42labs/A42-data-science
+    cookiecutter https://github.com/JessicaRudd/A42-data-science
 
 
 <!-- [![asciicast](https://asciinema.org/a/244658.svg)](https://asciinema.org/a/244658) -->
@@ -42,7 +42,7 @@ The directory structure of your new project looks like this:
     ├── LICENSE
     ├── ETHICS.md          <- The data science ethics checlist for this project. 
     ├── README.md          <- The top-level README for developers using this project.
-    ├── Makefile           <- Makefile with commands like `make data` or `make train`
+    ├── Makefile           <- Makefile with commands like `make venv` or `make test`
     │   
     │── log                <- Folder to store python log files 
     │
@@ -59,14 +59,13 @@ The directory structure of your new project looks like this:
     ├── notebooks          <- Jupyter notebooks. Naming convention is a number (for ordering),
     │                         the creator's initials, and a short `-` delimited description, e.g.
     │                         `1.0-jqp-initial-data-exploration`.
+    |                      <- Includes an analysis template notebook to get started
     │
     ├── references         <- Data dictionaries, manuals, and all other explanatory materials.
     │
     ├── reports            <- Generated analysis as HTML, PDF, LaTeX, etc.
     │   └── figures        <- Generated graphics and figures to be used in reporting
     │
-    ├── environment.yml   <- The requirements file for reproducing the analysis conda environment, e.g.
-    │                         generated with `conda env freeze > environment.yml`
     │
     ├── setup.py           <- makes project pip installable (pip install -e .) so src can be imported
     ├── src                <- Source code for use in this project.
@@ -90,16 +89,16 @@ The directory structure of your new project looks like this:
     │       └── visualize.py
     │
     │
-    └── tox.ini            <- tox file with settings for running tox; see tox.readthedocs.io
+    └── pyproject.toml            <- black, isort, pytest configs
 
 ```
 
-### Installing development requirements
+### Installing cookiecutter development requirements
 ------------
 
     pip install -r requirements.txt
 
-### Running the tests
+### Running the cookiecutter tests
 ------------
 
     py.test tests
