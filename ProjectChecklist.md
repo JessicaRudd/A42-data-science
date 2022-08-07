@@ -18,6 +18,10 @@
         ```
         brew install pyenv
         ```
+      - [ ] Install pyenv-virtualenv
+        ```
+        brew install pyenv-virtualenv
+        ```
       - [ ] Add pyenv to your PATH by updating .zshrc file
         ```
         echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.zshrc
